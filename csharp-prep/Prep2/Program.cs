@@ -48,7 +48,7 @@ class Program
         }
 
 
-        Console.WriteLine("");
-        Console.WriteLine($"Your letter grade is {yourGrade}.");
+        /*Console.WriteLine("");
+        Console.WriteLine($"Your letter grade is {yourGrade}.");*/
     }
 }
