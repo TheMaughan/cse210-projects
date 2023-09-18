@@ -44,7 +44,7 @@ class Program
         }
         else
         {
-            Console.WriteLine("You failed... (╯°□°）╯︵ ┻━┻");
+            Console.WriteLine("You failed... (¬_¬ )");
         }
 
 
