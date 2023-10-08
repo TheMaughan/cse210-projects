@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-File file = new File();
+//JournalFileManager file = new JournalFileManager();
 Display menu = new Display();
 
 //Console.WriteLine(file._filePath);
