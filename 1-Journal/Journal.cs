@@ -1,10 +1,10 @@
 public class Journal
 {
-	private List<Entry> entries;
+	private List<Entry> _entries;
 
 	public void Display()
 	{
-		entries = new List<Entry>();
+		_entries = new List<Entry>();
 	}
 
 	public void AddEntry(string prompt, string response)
@@ -16,10 +16,10 @@ public class Journal
 			Date = DateTime.Now
 		};
 
-		entries.Add(entry);
+		_entries.Add(entry);
 	}
 
-	
+
 
 
 

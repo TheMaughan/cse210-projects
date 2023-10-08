@@ -1,16 +1,19 @@
+using System.IO; 
 public class Display
 {
+	Random _random = new Random();
+	File _editFile = new File();
+	Journal _journal = new Journal();
 
 
-	string[] prompts = {
+	string[] _prompts = {
 		"Who was the most interesting person I interacted with today?",
         "What was the best part of my day?",
         "How did I see the hand of the Lord in my life today?",
         "What was the strongest emotion I felt today?",
         "If I had one thing I could do over today, what would it be?"
 	};
-
-	Random random = new Random();
+	
 
 	public void Menu()
 	{
@@ -28,22 +31,36 @@ public class Display
 			switch (choice)
 			{
 				case "1":
+					Console.WriteLine("=============================================\n");
+					string randomPrompt = _prompts[randomIndex];
+					Console.WriteLine($"Prompt: {randomPrompt}");
+					Console.Write("Your response: ");
+					string response = Console.ReadLike();
+					_journal.AddEntry(randomPrompt, response);
 					break;
 
 				case "2":
+					Console.WriteLine("=============================================\n");
+					_editFile.DisplayFile();
 					break;
 
 				case "3":
+					Console.WriteLine("=============================================\n");
+					//_editFile.SaveToFile();
 					break;
 
 				case "4":
+					Console.WriteLine("=============================================\n");
+					//_editFile.LoadFromFile();
 					break;
 
 				case "5":
+					Console.WriteLine("=============================================\n");
 					return;
 
 				default:
-					Console.WriteLine("Invalid entry. Please type a number 1 - 5.");
+					Console.WriteLine("=============================================");
+					Console.WriteLine("\nInvalid entry. Please type a number 1 - 5.\n");
 					break;
 			}
 		}

@@ -3,7 +3,7 @@
 File file = new File();
 Display menu = new Display();
 
-Console.WriteLine(file._filePath);
-file.ReadFile();
+//Console.WriteLine(file._filePath);
+//file.ReadFile();
 
 menu.Menu();

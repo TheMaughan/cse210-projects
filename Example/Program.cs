@@ -20,11 +20,13 @@ public class JournalEntry
 public class Journal
 {
     private List<JournalEntry> entries; // List to store journal entries
+    private int lastSavedIndex;
 
     // Constructor to initialize the journal with an empty list of entries
     public Journal()
     {
         entries = new List<JournalEntry>();
+        lastSavedIndex = -1;
     }
 
     // Method to add a new journal entry with the provided prompt, response, and current date
@@ -54,16 +56,19 @@ public class Journal
         try
         {
             // Open a StreamWriter to the specified file
-            using (StreamWriter writer = new StreamWriter(fileName))
+            using (StreamWriter writer = new StreamWriter(fileName, true))
             {
-                foreach (var entry in entries)
+
+                for (int i = lastSavedIndex + 1; i <entries.Count; i++)
                 {
-                    // Write the entry details (date, prompt, response) to the file
-                    writer.WriteLine($"{entry.Date}|{entry.Prompt}|{entry.Response}");
+                    var entry = entries[i];
+                    writer.WriteLine($"{entry.Date} | {entry.Prompt} | {entry.Response}");
                 }
+                lastSavedIndex = entries.Count - 1;
             }
             Console.WriteLine("Journal saved successfully."); // Print success message
         }
+        
         catch (Exception e)
         {
             Console.WriteLine("An error occurred while saving the journal: " + e.Message); // Handle any errors
