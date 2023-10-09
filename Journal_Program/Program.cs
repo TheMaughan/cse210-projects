@@ -3,6 +3,7 @@
 //JournalFileManager file = new JournalFileManager();
 Display menu = new Display();
 
+
 //Console.WriteLine(file._filePath);
 //file.ReadFile();
 

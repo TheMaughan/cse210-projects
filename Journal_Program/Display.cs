@@ -25,7 +25,7 @@ public class Display
 			Console.WriteLine("4 - Load the journal");
 			Console.WriteLine("5 - Exit");
 
-			string choice = Console.ReadLine();
+			string choice = Console.ReadLine() ?? string.Empty;
 
 			switch (choice)
 			{

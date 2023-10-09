@@ -39,7 +39,7 @@ public class JournalFileManager
 		Console.WriteLine("Journal Entries:");
 		foreach (var entry in _entries)
 		{
-			Console.WriteLine($"{entry} \n");
+			Console.WriteLine(entry);
 		}
 	}
 
@@ -103,14 +103,21 @@ public class JournalFileManager
 				{
 					string line;
 
+					/*
+					while((line = reader.ReadLine()) != null)
+					{
+						Console.WriteLine(line);
+					}*/		
+					
+					
 					while ((line = reader.ReadLine()) != null)
 					{
-						string[] parts = line.Split('|');
+						string[] parts = line.Split(',');
 						if (parts.Length == 3)
 						{
 							Entry entry = new Entry
 							{
-								Date = DateTime.Parse(parts[0]),
+								Date = DateTime.ParseExact(parts[0], "yyyy-MM-dd HH:mm:ss", null),
 								Prompt = parts[1],
 								Response = parts[2]
 							};
@@ -118,8 +125,17 @@ public class JournalFileManager
 						}
 					}
 				}
+				Console.WriteLine($"Journal file named '{fileName}' loaded successfully.\n");
+				/*foreach (var entry in _entries)
+				{
+					Console.WriteLine(entry);
+				}*/
 			}
-			Console.WriteLine($"Journal file named '{fileName}' loaded successfully.\n");
+			else
+			{
+				Console.WriteLine($"File not found: {fileName}");
+			}
+			
 		}
 
 		catch
