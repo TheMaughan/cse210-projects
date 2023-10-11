@@ -11,38 +11,45 @@ public class Book
 	{
 		_author = author;
 		_name = name;
-		//_timesRead = timesRead;
-		//_available = available;
+		_timesRead = 0;
+		_available = true;
 	}
 
-	public bool HasAuthor()
+	public bool HasAuthor(string author)
 	{
-		return true;
+		return _author.Contains(author);
 	}
 
 	public void Display()
 	{
 		Console.WriteLine($"The book's author is: {_author}\nThe book's title is: {_name}");
+
+		if (!_available)
+		{
+			Console.WriteLine("[Checked Out]");
+		}
 	}
 
 	public bool IsAvailable()
 	{
-		return true;
+		return _available;
 	}
 
 	public int TimesRead()
 	{
-		return 3;
+		return _timesRead;
 	}
 
 	public void CheckOut()
 	{
+		_timesRead += 1;
+		_available = false;
 
 	}
 
 	public void CheckIn()
 	{
-
+		_available = true;
 	}
 
 }

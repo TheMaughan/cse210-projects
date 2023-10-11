@@ -5,3 +5,6 @@ Book hp = new Book("JK Rowling", "Harry Potter");
 hp.Display();
 
 Console.WriteLine();
+
+Bookcase bookcase = new Bookcase();
+
