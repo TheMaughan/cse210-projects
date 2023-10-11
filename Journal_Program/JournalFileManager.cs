@@ -3,25 +3,20 @@ using System.Globalization;
 
 public class JournalFileManager
 {
-	private int _lastSavedIndex;
+	//private int _lastSavedIndex;
 	private List<Entry> _entries;
 	
 	public JournalFileManager()
 	{
 		_entries = new List<Entry>();
-		_lastSavedIndex = -1;
+		//_lastSavedIndex = -1;
 	}
 
 	public void AddEntry(string prompt, string response)
 	{
 
 		
-		Entry entry = new Entry
-		{
-			Prompt = prompt,
-			Response = response,
-			Date = DateTime.Now
-		};
+		Entry entry = new Entry(DateTime.Now, prompt, response);
 
 		_entries.Add(entry);
 	}
@@ -43,25 +38,34 @@ public class JournalFileManager
 		}
 	}
 
-	public void MarkExistingEntries(int startIndex, int endIndex) //Stop Duplicating Stuff!!!
+	/*public void MarkExistingEntries(int startIndex, int endIndex) //Stop Duplicating Stuff!!!
 	{
 		for (int i = startIndex; i <= endIndex; i++)
 		{
 			_entries[i].Displayed = true;
 		}
-	}
+	}*/
 
 	public void SaveToFile(string fileName)
 	{
 		//string name = fileName;
 		try
 		{
-			if (Path.GetExtension(fileName) != ".csv")
-				fileName = Path.ChangeExtension(fileName, ".csv"); //Just add the @#$# file extension!
+			if (!fileName.EndsWith(".csv"))
+				fileName += ".csv"; //Just add the @#$# file extension!
 
-			using (StreamWriter writer = new StreamWriter(fileName, true))
+			using (StreamWriter writer = new StreamWriter(fileName))
 			{
-				for (int i = _lastSavedIndex + 1; i <_entries.Count; i++)
+				
+				foreach (var entry in _entries)
+				{
+					writer.WriteLine($"{entry.Date.ToString("yyyy-MM-dd HH:mm:ss")},{entry.Prompt},{entry.Response}");
+				}
+				
+				
+				
+				
+				/*for (int i = _lastSavedIndex + 1; i <_entries.Count; i++)
 				{
 					if (!_entries[i].Displayed)
 					{
@@ -72,28 +76,28 @@ public class JournalFileManager
                     }
 					
 				}
-				_lastSavedIndex = _entries.Count - 1;
+				_lastSavedIndex = _entries.Count - 1;*/
 			}
 			Console.WriteLine($"Jounal entry saved successfully to the file '{fileName}'.\n");
 		}
 
-		catch
+		catch (Exception e)
 		{
-			Console.WriteLine($"An error occurred while saving the journal: \n");
+			Console.WriteLine($"An error occurred while saving the journal: {e.Message}");
 		}
 	}
 
-	private string EscapeCsvField(string field)
+	/*private string EscapeCsvField(string field)
 	{
 		return $"\"{field.Replace("\"", "\"\"")}\"";
-	}
+	}*/
 
 	public void LoadFromFile(string fileName)
 	{
 		try
 		{
-			if (Path.GetExtension(fileName) != ".csv")
-				fileName = Path.ChangeExtension(fileName, ".csv");
+			if (!fileName.EndsWith(".csv"))
+				fileName += ".csv";
 
 			if (File.Exists(fileName))
 			{
@@ -102,34 +106,17 @@ public class JournalFileManager
 				using (StreamReader reader = new StreamReader(fileName))
 				{
 					string line;
-
-					/*
-					while((line = reader.ReadLine()) != null)
-					{
-						Console.WriteLine(line);
-					}*/		
-					
 					
 					while ((line = reader.ReadLine()) != null)
 					{
-						string[] parts = line.Split(',');
-						if (parts.Length == 3)
+						if (Entry.TryParse(line, out Entry entry))
 						{
-							Entry entry = new Entry
-							{
-								Date = DateTime.ParseExact(parts[0], "yyyy-MM-dd HH:mm:ss", null),
-								Prompt = parts[1],
-								Response = parts[2]
-							};
 							_entries.Add(entry);
 						}
 					}
 				}
 				Console.WriteLine($"Journal file named '{fileName}' loaded successfully.\n");
-				/*foreach (var entry in _entries)
-				{
-					Console.WriteLine(entry);
-				}*/
+				
 			}
 			else
 			{
