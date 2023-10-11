@@ -1,11 +1,13 @@
 using System.IO;
 using System.Collections.Generic;
+#nullable enable //I'm attempting to get rid of all the warnings about "null" stuff. 
+//This is also the explination for the "?" & "??" in the code below:
 public class Display
 {
 	Random _random = new Random();
 	JournalFileManager _editFile = new JournalFileManager();
 
-	string[] _prompts = {
+	string[]? _prompts = {
 		"Who was the most interesting person I interacted with today?",
         "What was the best part of my day?",
         "How did I see the hand of the Lord in my life today?",
@@ -31,12 +33,23 @@ public class Display
 			{
 				case "1":
 					Console.WriteLine("=============================================\n");
-					int randomIndex = _random.Next(_prompts.Length);
-					string randomPrompt = _prompts[randomIndex];
-					Console.WriteLine($"Prompt: {randomPrompt}");
-					Console.Write("Your response: ");
-					string response = Console.ReadLine();
-					_editFile.AddEntry(randomPrompt, response);
+					if (_prompts != null && _prompts.Length > 0)
+					{
+						int randomIndex = _random.Next(0, _prompts.Length); //Generate a random index
+						string randomPrompt = _prompts[randomIndex] ?? "No prompt selected";
+						
+						Console.WriteLine($"Prompt: {randomPrompt}");
+						
+						Console.Write("Your response: ");
+						string? response = Console.ReadLine();
+						
+						_editFile.AddEntry(randomPrompt, response);
+					} 
+					else
+					{
+						Console.WriteLine("Error: No prompts available.");
+					}
+
 					Console.WriteLine("");
 					break;
 
