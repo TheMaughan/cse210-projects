@@ -22,7 +22,7 @@ public class Book
 
 	public void Display()
 	{
-		Console.WriteLine($"The book's author is: {_author}\nThe book's title is: {_name}");
+		Console.WriteLine($"The book's author is: {_author}\nThe book's title is: {_name}\nYou have read this book {_timesRead} times.\n");
 
 		if (!_available)
 		{
