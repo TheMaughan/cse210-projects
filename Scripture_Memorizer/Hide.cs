@@ -12,7 +12,7 @@ public class Hide
     public Hide(Scripture scripture)
     {
         _scripture = scripture;
-        _revealCount = 0;
+        _revealCount = 2;
         _hiddenIndex = new HashSet<int>();
     }
 
@@ -43,7 +43,7 @@ public class Hide
                     Console.Clear();
                     if (_revealCount < _words.Length)
                     {
-                        //HideRandom();
+                        HideRandom();
 						HiddenDisplay();
 						_revealCount += 2;
                         Console.WriteLine("Press 'Enter' to hide more words, or type 'quit' to exit.");
@@ -52,8 +52,7 @@ public class Hide
                     {
                         Environment.Exit(0);
                     }
-					HideRandom();
-                    _revealCount += 2;
+					
                     break;
 
                 default:
