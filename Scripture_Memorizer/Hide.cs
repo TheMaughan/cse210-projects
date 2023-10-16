@@ -12,7 +12,7 @@ public class Hide
     public Hide(Scripture scripture)
     {
         _scripture = scripture;
-        _revealCount = 2;
+        _revealCount = 0;
         _hiddenIndex = new HashSet<int>();
     }
 
