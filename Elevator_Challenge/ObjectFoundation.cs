@@ -1,11 +1,12 @@
 public class ObjectFoundations
 {
-	protected int _pointX = 0; //Shaft Number
-	protected int _pointY = 0; //Location in Shaft
+	protected int _pointX; //Shaft Number
+	protected int _pointY; //Location in Shaft
 
-	public ObjectFoundations(int shaft, int floor)
+	//public ObjectFoundations(int shaft, int floor)
+	public ObjectFoundations(int shaft)
 	{
 		_pointX = shaft;
-		_pointY = floor;
+		//_pointY = floor;
 	}
 }

@@ -4,8 +4,8 @@ public class VIP : Elevator
 {
 	private bool _cardKey = false; //Default state is locked.
 
-	//public Elevator(int x) : base(x)
-	public VIP(int x, int y) : base(x, y)
+	//public VIP(int x, int y) : base(x, y)
+	public VIP(int x) : base(x)
 	{
 		// Call the base class constructor with the appropriate parameters.
 	}
