@@ -34,6 +34,7 @@ public class Elevator : ObjectFoundations
 		{
 			Arrived();
 			Console.WriteLine("\nYou are already at your floor destination.\n");
+			Console.WriteLine($"_pointY is logged at {_pointY}\n");
 		}
 	}
 
@@ -54,6 +55,7 @@ public class Elevator : ObjectFoundations
 			{
 				Arrived();
 				Console.WriteLine($"\nYou have arrived at the floor {Requests[0]}.\n");
+				Console.WriteLine($"_pointY is logged at {_pointY}\n"); //Requests[0] & pointY should match.
 			}	
 		}
 	}
