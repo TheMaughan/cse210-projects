@@ -1,8 +1,11 @@
-public class ObjectFoundation
+public class ObjectFoundations
 {
-	public double _pointX = 0.0;
-	public double _pointY = 0.0;
-	public double _dx = 0.0;
-	public double _dy = 0.0;
+	protected int _pointX = 0; //Shaft Number
+	protected int _pointY = 0; //Location in Shaft
 
+	public ObjectFoundations(int shaft, int floor)
+	{
+		_pointX = shaft;
+		_pointY = floor;
+	}
 }
