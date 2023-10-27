@@ -17,32 +17,37 @@ public class Elevator : ObjectFoundations
 
     public void FloorCall(int floorNum)
     {
-        if (!_isMoving)
+        // After second thuoght, the commented out code is actually outside of normal elevator behavior.
+        // Additional requests are accepcepted while the elevator is moving.
+        // if (!_isMoving)
+        // {
+        if (floorNum < 1 || floorNum > _maxFloor) // Assuming there is no basement floor and limiting the top floor access.
         {
-            if (floorNum < 1 || floorNum > _maxFloor)
-            {
-                Console.WriteLine($"Invalid floor entry. The valid floors are from 1 to {_maxFloor}.");
-            }
-            else
-            {
-                _isCalled = true;
-                Requests.Add(floorNum);
-                _destinationFloor = floorNum;
-                MoveElevator();
-            }
+            // Violations are flagged.
+            Console.WriteLine($"/!\\ Invalid floor entry /!\\ \nThe valid floors are from 1 to {_maxFloor}.");
+            Console.WriteLine($"(⌐■_■)* Error Report\nElevator number: {_pointX}\nAttempted floor: {floorNum}\n");
         }
         else
         {
-            Console.WriteLine("Elevator is already in motion. Please wait for it to arrive.");
+            _isCalled = true;
+            Requests.Add(floorNum);
+            _destinationFloor = floorNum;
+            MoveElevator();
         }
+        //}
+        // else
+        // {
+        //     Console.WriteLine("Elevator is already in motion. Please wait for it to arrive.");
+        // }
     }
 
-    private void MoveElevator()
+    private void MoveElevator() // This method moves the elevator and displays the floor number for each floor the elevator passes through.
     {
         if (_isCalled)
         {
             _isMoving = true;
-            Console.WriteLine($"\nElevator called to floor {_destinationFloor}. Moving...");
+            Console.WriteLine($"\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+            Console.WriteLine($"Elevator {_pointX} called to floor {_destinationFloor}.");
             if (_destinationFloor > _pointY)
             {
                 Console.WriteLine("Moving up...");
@@ -72,7 +77,8 @@ public class Elevator : ObjectFoundations
 
     protected void Arrived()
     {
-        Console.WriteLine($"\nYou have arrived at the floor {_destinationFloor}.");
+        Console.WriteLine($"\n ( ^_^)/ You have arrived at the floor {_destinationFloor}.");
+        Console.WriteLine($" ====== Elevator {_pointX} is Currently on Floor {_destinationFloor} ====== \n");
         _isMoving = false;
         _isCalled = false;
         Requests.RemoveAt(0);

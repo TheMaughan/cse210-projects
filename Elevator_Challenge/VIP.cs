@@ -35,7 +35,7 @@ public class VIP : Elevator
 		}
 		else
 		{
-			Console.WriteLine($"Invalid key card. VIP access is denied.");
+			Console.WriteLine($"/!\\ Invalid key card! VIP access is denied! /!\\");
 		}
 	}
 
