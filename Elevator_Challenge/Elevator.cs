@@ -77,6 +77,7 @@ public class Elevator : ObjectFoundations
 
     protected void Arrived()
     {
+        // Operations that controll the doors and other internal elevator car functions will be created in different classes and called here:
         Console.WriteLine($"\n ( ^_^)/ You have arrived at the floor {_destinationFloor}.");
         Console.WriteLine($" ====== Elevator {_pointX} is Currently on Floor {_destinationFloor} ====== \n");
         _isMoving = false;
