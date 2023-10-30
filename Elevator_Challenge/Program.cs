@@ -15,15 +15,16 @@ e2.FloorCall(3);
 e2.FloorCall(300);
 e2.FloorCall(3);
 
-vip.ValidKey(true); // Authorizes the VIP Elevator to the 31st floor.
-vip.VIPFloorCall(); // This calls the VIP Elevator to the 31st floor.
-
+vip.VIPFloorCall(); // Someone on the 31st floor called the VIP elevator.
+//vip.FloorCall(31); // Oops, you need to use the your Key Card again!
 vip.FloorCall(14); // VIP Elevator can be used to get to any floor.
 
+vip.ValidKey(true); // Authorizes the VIP Elevator to the 31st floor.
+vip.FloorCall(31); // Someone in the VIP elevator requested the 31st floor (shouldn't work, no new keycard)
+vip.FloorCall(30); // VIP leaves the VIP floor, _keyCard should now be false.
 vip.FloorCall(31);
-e2.FloorCall(31);
 
+e2.FloorCall(31); // Other Elevators cannot access the 31st floor.
 
-vip.ValidKey(false);
-vip.VIPFloorCall();
-vip.FloorCall(31);
+//vip.ValidKey(false);
+vip.VIPFloorCall();// Someone on the 31st floor called the VIP elevator.

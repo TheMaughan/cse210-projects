@@ -21,6 +21,7 @@ public class VIP : Elevator
 		else
 		{
 			_maxFloor = 30;
+			Console.WriteLine($"/!\\ Invalid key card! VIP access is denied! /!\\");
 		}
 
 		return _cardKey;
@@ -28,23 +29,34 @@ public class VIP : Elevator
 
 	public void VIPFloorCall()
 	{
-		if (_cardKey)
-		{
+		_cardKey = true;
+		// if (_cardKey)
+		// {
 			Requests.Clear();
 			FloorCall(_maxFloor);
-		}
-		else
-		{
-			Console.WriteLine($"/!\\ Invalid key card! VIP access is denied! /!\\");
-		}
+		// }
+		// else
+		// {
+		// 	Console.WriteLine($"/!\\ Invalid key card! VIP access is denied! /!\\");
+		// }
 	}
 
 	public new void Arrived()
 	{
 		// Restore defaults.
-		_maxFloor = 30;
-		_cardKey = false;
-		base.Arrived();
+		if (_maxFloor == 31)
+		{
+			_maxFloor = 30;
+			_cardKey = false;
+			base.Arrived();	
+		}
+		// else
+		// {
+		// 	_maxFloor = 30;
+		// 	_cardKey = false;
+		// 	base.Arrived();
+		// }
+		
 	}
 
 }
