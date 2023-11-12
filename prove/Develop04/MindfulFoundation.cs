@@ -5,49 +5,77 @@ using System.Runtime.CompilerServices;
 
 abstract class MindfulFoundation
 {
-	public int _delayTimer;
+	protected ConsoleKeyInfo _keyInfo;
+	public int _secondsDuration = 1;
 	public List<string> Message { get; set; }
 	public int _iterateIndex = 0;
 
-	public MindfulFoundation(int time)
+	public virtual void StartActivity()
 	{
-		_delayTimer = time;
+		SetDuration();
+		DisplayStartingMessage();
+		PrepareForActivity();
+		PerformActivity();
+		DisplayEndingMessage();
+		DisplayAnimation();
+		StartMenu();
 	}
 
-	
-	public void Animate(List<string> _spriteScript, ref int currentIndex)
+	protected virtual void SetDuration()
 	{
-		Console.Clear();
-
-		Console.WriteLine(_spriteScript[currentIndex]);
-
-		currentIndex = (currentIndex + 1) % _spriteScript.Count;
+		Console.Write("Enter the duration of the activity in seconds: ");
+		
 	}
 
-	public void DisplayAnimation()
+	protected virtual void DisplayStartingMessage()
 	{
-		ConsoleKeyInfo keyInfo;
-		bool shouldContinue = true;
+		Console.WriteLine("Starting the activity...");
+	}
+
+	protected virtual void PrepareForActivity()
+	{
+		// Add common preparation steps
+		Thread.Sleep(2000);
+	}
+
+	protected virtual void PerformActivity()
+	{
+		// Add activity specific logic
+	}
+
+	protected virtual void DisplayEndingMessage()
+	{
+		Console.WriteLine("Great Job! You have completed the activity!");
+		Console.WriteLine($"Activity duration: {_secondsDuration} seconds");
+		Thread.Sleep(2000);
+
+	}
+
+	public virtual void DisplayAnimation()
+	{
 
 		do
 		{
-			
-			Animate(Message, ref _iterateIndex);
 
 			if (Console.KeyAvailable)
 			{
-				keyInfo = Console.ReadKey(true);
+				_keyInfo = Console.ReadKey(true);
 			}
 			else
 			{
-				keyInfo = new ConsoleKeyInfo();
+				_keyInfo = new ConsoleKeyInfo();
 			}
 
-			Thread.Sleep(_delayTimer);
-			shouldContinue = false;
+			Thread.Sleep(_secondsDuration);
 
-		} while (shouldContinue);
+		} while (true);
 
+	}
+
+	protected virtual void StartMenu()
+	{
+		Menu menu = new Menu();
+		menu.DisplayMenu();
 	}
 
 }

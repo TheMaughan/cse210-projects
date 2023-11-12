@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 
 class BootUp
 {
+	protected ConsoleKeyInfo _keyInfo;
 	public List<string> _spriteScript = new List<string>
 	{
 		"(-_-)",
@@ -56,72 +57,51 @@ class BootUp
 		"(⌐■_■)        #@",
 		"(⌐■_■)       *#*",
 		"(⌐■_■)       * *",
-		"(⌐■_■)         *",
+		"(⌐■_■)         *"
 	};
 	
 	public int _spriteIndex = 0;
 
-	
-	public void Animate(List<string> _spriteScript, ref int currentIndex)
-	{
-		//Console.Clear();
-		
-
-		Console.Write(_spriteScript[currentIndex]);
-
-		currentIndex = (currentIndex + 1) % _spriteScript.Count;
-	}
-
 	public void DisplayAnimation()
 	{
-		ConsoleKeyInfo keyInfo;
-		Console.WriteLine("Welcome to the Mindful App!");
-		Console.WriteLine("Press 'Enter' to continue");
+		//ConsoleKeyInfo keyInfo;
+		Console.WriteLine("\nWelcome to the Mindful App!");
+		Console.WriteLine("Press 'Enter' to continue\n");
+
 		do
 		{
-			
-			Animate(_spriteScript, ref _spriteIndex);
-
-			if (Console.KeyAvailable)
+			foreach (string s in _spriteScript)
 			{
-				keyInfo = Console.ReadKey(true);
-			}
-			else
-			{
-				keyInfo = new ConsoleKeyInfo();
-			}
+				Console.Write(s);
+				Thread.Sleep(500);
 
-			Thread.Sleep(500);
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
-			Console.Write("\b \b");
+				for (int i = 17; i > 0; i--)
+				{
+					Console.Write("\b \b");
+				}
 
-			
-			int newTop = Console.CursorTop - _spriteScript.Count - 1;
+				if (Console.KeyAvailable)
+				{
+					_keyInfo = Console.ReadKey(true);
 
-			if (newTop >= 0)
-			{
-				Console.SetCursorPosition(0, newTop);
+					// Check if the pressed key is Enter
+					if (_keyInfo.Key == ConsoleKey.Enter)
+					{
+						// Exit the loop if Enter is pressed
+						StartMenu();
+						return;
+					}
+				}
 			}
 
-			//Console.SetCursorPosition(0, Console.CursorTop - _spriteScript.Count - 1);
-					
-		} while (keyInfo.Key != ConsoleKey.Escape);
-		
-
+		} while (true); // Loop indefinitely, exit when Enter is pressed
 	}
+
+	private void StartMenu()
+	{
+		Menu menu = new Menu();
+		menu.DisplayMenu();
+	}
+
 
 }

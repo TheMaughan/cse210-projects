@@ -1,7 +1,7 @@
 class Reflection : MindfulFoundation
 {
 
-public Reflection(int time) :base(time)
+public Reflection()
 	{
 		Message = new List<string>()
 		{

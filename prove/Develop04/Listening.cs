@@ -1,7 +1,7 @@
 class Lisening : MindfulFoundation
 {
 
-public Lisening(int time) :base(time)
+public Lisening()
 	{
 		Message = new List<string>()
 		{
