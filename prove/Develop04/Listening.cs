@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 class Lisening : MindfulFoundation
 {
 
@@ -11,16 +13,41 @@ class Lisening : MindfulFoundation
 
 	protected override void SetDuration()
 	{
-		Console.Write("How long do you want to perform whole activity?\nTime is calculated in seconds: ");
-		_activityDuration = Convert.ToInt32(Console.ReadLine());
+		bool validInput = false;
 
-		Console.Write("");
-		_secondsDuration = Convert.ToInt32(10);
+		do
+		{
+			Console.Write("How long do you want to perform the whole activity?\nTime is calculated in seconds: ");
+
+			// Read the user input
+			string userInput = Console.ReadLine();
+
+			if (string.IsNullOrWhiteSpace(userInput))
+			{
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("Invalid input. Please enter a valid integer.\n");
+				Console.ResetColor(); // Restore the default text color
+			}
+			else if (int.TryParse(userInput, out _activityDuration))
+			{
+				validInput = true;
+			}
+			else
+			{
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("Invalid input. Please enter a valid integer.\n");
+				Console.ResetColor(); // Restore the default text color
+			}
+		} while (!validInput);
+
+		//Console.Write("");
+		_secondsDuration = Convert.ToInt32(2.5);
 		
 	}
 
 	protected override void PerformActivity()
    	{
+		Console.Clear();
 		Console.WriteLine("\nPress 'ESC' anytime to exit the activiy.\n==============================================");
         Console.WriteLine("\nThis activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.\n");
 
@@ -29,32 +56,42 @@ class Lisening : MindfulFoundation
 		Console.WriteLine(prompt);
 		DisplayAnimation();
 
-		Console.WriteLine("Get ready to list items...");
+		int itemCount = 0;
+		Stopwatch stopwatch = new Stopwatch();
+
+		Console.WriteLine("Get ready to list items in...");
 		DisplayAnimation();
+		Console.Write($"Starting in...");
+
+		for (int i = 5; i > 0; i--)
+		{
+			Console.Write($"{i}");
+			Thread.Sleep(1000);
+			Console.Write("\b \b");
+		}
+		
 
 		Console.WriteLine("Begin listing items!");
+		stopwatch.Start();
 
-		int itemCount = 0;
-
-		
-		for (int i = _activityDuration; i > 0; i--)
+		while (stopwatch.Elapsed.TotalSeconds < _activityDuration)
 		{
-			
-			Console.WriteLine($"Time remaining: {i} seconds");
-			Thread.Sleep(1000);
-
 			Console.Write($"{itemCount + 1}. ");
-            string item = Console.ReadLine();
+			string item = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(item))
             {
                 break;
             }
 
-            itemCount++;
+			itemCount++;
 		}
+
+		stopwatch.Stop();
 		Console.WriteLine("Time's up!");
 		Console.WriteLine($"You listed a total of {itemCount} items.");
-		Thread.Sleep(30000);
+		DisplayAnimation();
+		
 		Console.WriteLine("\nPress 'Esc' to exit.\n");
+		DisplayAnimation();
     }
 }

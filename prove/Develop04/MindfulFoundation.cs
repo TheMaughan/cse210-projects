@@ -19,20 +19,68 @@ abstract class MindfulFoundation
 		PrepareForActivity();
 		PerformActivity();
 		DisplayEndingMessage();
-		//DisplayAnimation();
 		StartMenu();
 		EscapeKey();
 	}
 
 	protected virtual void SetDuration()
 	{
-		Console.Write("How long do you want to perform whole activity?\nTime is calculated in seconds: ");
-		_activityDuration = Convert.ToInt32(Console.ReadLine());
+		bool validInput = false;
 
-		Console.Write("Enter the duration of each task in seconds: ");
-		_secondsDuration = Convert.ToInt32(Console.ReadLine());
-		
+		do
+		{
+			Console.Write("How long do you want to perform the whole activity?\nTime is calculated in seconds: ");
+
+			// Read the user input
+			string userInput = Console.ReadLine();
+
+			if (string.IsNullOrWhiteSpace(userInput))
+			{
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("Invalid input. Please enter a valid integer.\n");
+				Console.ResetColor(); // Restore the default text color
+			}
+			else if (int.TryParse(userInput, out _activityDuration))
+			{
+				validInput = true;
+			}
+			else
+			{
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("Invalid input. Please enter a valid integer.\n");
+				Console.ResetColor(); // Restore the default text color
+			}
+		} while (!validInput);
+
+		validInput = false;
+
+		do
+		{
+			Console.Write("Enter the duration of each task in seconds: ");
+
+			// Read the user input
+			string userInput = Console.ReadLine();
+
+			if (string.IsNullOrWhiteSpace(userInput))
+			{
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("Invalid input. Please enter a valid integer.\n");
+				Console.ResetColor(); // Restore the default text color
+			}
+			else if (int.TryParse(userInput, out _secondsDuration))
+			{
+				validInput = true;
+			}
+			else
+			{
+				Console.ForegroundColor = ConsoleColor.Red;
+				Console.WriteLine("Invalid input. Please enter a valid integer.\n");
+				Console.ResetColor(); // Restore the default text color
+			}
+		} while (!validInput);
 	}
+
+
 
 	protected virtual void DisplayStartingMessage()
 	{
@@ -60,6 +108,13 @@ abstract class MindfulFoundation
 
 	public virtual void DisplayAnimation()
 	{
+		if (_secondsDuration <= 0)
+		{
+			Console.WriteLine("Invalid duration for animation. Exiting...");
+			StartMenu();
+			return;
+		}
+
 		DateTime startTime = DateTime.Now;
 		DateTime endTime = startTime.AddSeconds(_secondsDuration);
 
@@ -82,20 +137,20 @@ abstract class MindfulFoundation
 				_iterateIndex = 0;
 			}
 
-			// if (Console.KeyAvailable)
-			// {
-			// 	_keyInfo = Console.ReadKey(true);
+			if (Console.KeyAvailable)
+			{
+				_keyInfo = Console.ReadKey(true);
 
-			// 	// Check if the pressed key is Enter
-			// 	if (_keyInfo.Key == ConsoleKey.Escape)
-			// 	{
-			// 		// Exit the loop if Enter is pressed
-			// 		StartMenu();
-			// 		return;
-			// 	}
-			// }	
+				// Check if the pressed key is Escape
+				if (_keyInfo.Key == ConsoleKey.Escape)
+				{
+					// Exit the loop if Exit is pressed
+					StartMenu();
+					return;
+				}
+			}
 
-		} //hile (true);
+		}
 
 	}
 
@@ -107,10 +162,10 @@ abstract class MindfulFoundation
 			{
 				_keyInfo = Console.ReadKey(true);
 
-				// Check if the pressed key is Enter
+				// Check if the pressed key is Escape
 				if (_keyInfo.Key == ConsoleKey.Escape)
 				{
-					// Exit the loop if Enter is pressed
+					// Exit the loop if Exit is pressed
 					StartMenu();
 					return;
 				}

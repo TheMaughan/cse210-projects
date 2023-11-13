@@ -31,6 +31,7 @@ class Reflection : MindfulFoundation
 
     protected override void PerformActivity()
     {
+		Console.Clear();
 		Console.WriteLine("\nPress 'ESC' anytime to exit the activiy.\n==============================================");
         Console.WriteLine("\nThis activity will help you reflect on times in your life when you have shown strength and resilience.");
 		Console.WriteLine("This will help you recognize the power you have and how you can use it in other aspects of your life.\n");
