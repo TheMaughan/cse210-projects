@@ -6,7 +6,7 @@ class Menu : BootUp
 	{
 		while (true)
 		{
-						
+			Console.Clear();
 			Console.WriteLine("\nChoose an activity:");
 			Console.WriteLine("1. Breathing Activity");
 			Console.WriteLine("2. Reflection Activity");
@@ -21,14 +21,18 @@ class Menu : BootUp
 				case "1":
 					Breathing breath = new();
 					breath.StartActivity();
-					//breath.DisplayAnimation();
 					break;
+
 				case "2":
 					Reflection reflect = new();
+					reflect.StartActivity();
 					break;
+				
 				case "3":
 					Lisening listen = new();
+					listen.StartActivity();
 					break;
+				
 				case "4":
 					Environment.Exit(0);
 					break;
