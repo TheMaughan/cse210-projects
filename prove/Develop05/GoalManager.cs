@@ -108,7 +108,7 @@ class GoalManager
 		{
 			Console.WriteLine($"{i + 1}. {_goals[i].DisplayStatus()}");
 		}
-		Console.WriteLine($"Total Score: {_score} points");
+		Console.WriteLine($"Total Score: {_score} points\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	}
 	
 }
