@@ -6,7 +6,7 @@ class Menu
 	{
 		while (true)
         {
-            //Console.Clear();
+            Console.Clear();
             Console.WriteLine("\nMenu Options:");
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. List Goals");
@@ -31,6 +31,8 @@ class Menu
 
                 case '2':
                     _goalManager.DisplayGoals();
+                    Console.WriteLine("Press any key to continue...");
+                    Console.ReadKey();
                     break;
 
                 case '3':
@@ -46,7 +48,7 @@ class Menu
                     break;
 
                 case '5':
-                    //_goalManager.RecordEvent();
+                    _goalManager.RecordEvent();
                     break;
 
                 case '6':
