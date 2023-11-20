@@ -20,11 +20,19 @@ class GoalManager
 
 	}
 
-	public void RecordEvent(int goalIndex)
+	public void RecordEvent()
 	{
-		if (goalIndex >= 0 && goalIndex < _goals.Count)
+		Console.Clear();
+		Console.WriteLine("Available Goals:");
+		for (int i = 0; i < _goals.Count; i++)
 		{
-			_score += _goals[goalIndex].RecordGoal();
+			Console.WriteLine($"{i + 1}. {_goals[i].DisplayStatus()}");
+		}
+
+		Console.Write("Select the goal index to update: ");
+		if (int.TryParse(Console.ReadLine(), out int goalIndex) && goalIndex > 0 && goalIndex <= _goals.Count)
+		{
+			_score += _goals[goalIndex - 1].RecordGoal();
 		}
 		else
 		{
