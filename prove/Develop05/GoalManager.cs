@@ -16,7 +16,12 @@ class GoalManager
 	public void AddGoal()
 	{
 		GoalTypeMenu gmenu = new();
-		gmenu.DisplayCreateGoalMenu();
+		Goal newGoal = gmenu.DisplayCreateGoalMenu();
+
+		if (newGoal != null)
+        {
+            _goals.Add(newGoal);
+        }
 
 	}
 
@@ -33,6 +38,8 @@ class GoalManager
 		if (int.TryParse(Console.ReadLine(), out int goalIndex) && goalIndex > 0 && goalIndex <= _goals.Count)
 		{
 			_score += _goals[goalIndex - 1].RecordGoal();
+
+			//SaveToFile("goal");
 		}
 		else
 		{
@@ -42,6 +49,7 @@ class GoalManager
 
 	public void SaveToFile(string fileName)
 	{
+		int count = 0;
 		try
 		{
 			if (!fileName.EndsWith(".txt"))
@@ -52,7 +60,7 @@ class GoalManager
 				foreach(var goal in _goals)
 				{
 					// Serialize the goal details and write to the file
-					writer.WriteLine($"{goal.GetType().Name},{goal.GetDescription()},{goal.GetValue()},{goal.IsComplete()}");
+					writer.WriteLine($"{count++}. {goal.GetType().Name},{goal.GetDescription()},{goal.GetValue()},{goal.IsComplete()}");
 				}
 			}
 			Console.WriteLine($"Goals saved successfully to the file '{fileName}'.\n");

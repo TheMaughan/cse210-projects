@@ -1,7 +1,11 @@
 class GoalTypeMenu
 {
-	private List<Goal> _goals;
+	public List<Goal> _goals;
     private int _score;
+
+    public string _goalDescription;
+
+    public int _goalValue;
 
     public GoalTypeMenu()
     {
@@ -9,15 +13,15 @@ class GoalTypeMenu
         _score = 0;
     }
 
-    public void DisplayCreateGoalMenu()
+    public Goal DisplayCreateGoalMenu()
     {
         Console.WriteLine("\nCreating a New Goal:");
+
         Console.Write("Enter goal description: ");
-        string goalDescription = Console.ReadLine();
+        _goalDescription = Console.ReadLine();
 
         Console.Write("Enter goal value: ");
-        int goalValue;
-        while (!int.TryParse(Console.ReadLine(), out goalValue))
+        while (!int.TryParse(Console.ReadLine(), out _goalValue))
         {
             Console.WriteLine("Invalid input. Please enter a valid integer for the goal value.");
             Console.Write("Enter goal value: ");
@@ -30,7 +34,7 @@ class GoalTypeMenu
 
         GoalType goalType = GetGoalTypeInput();
 
-        CreateGoal(goalType, goalDescription, goalValue);
+        return CreateGoal(goalType, _goalDescription, _goalValue);
     }
 
     private GoalType GetGoalTypeInput()
@@ -54,7 +58,7 @@ class GoalTypeMenu
         }
     }
 
-    private void CreateGoal(GoalType goalType, string description, int value)
+    private Goal CreateGoal(GoalType goalType, string description, int value)
     {
         Goal newGoal = null;
 
@@ -80,12 +84,13 @@ class GoalTypeMenu
 
         if (newGoal != null)
         {
-            _goals.Add(newGoal);
             Console.WriteLine("Goal created successfully!");
         }
 
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
+
+        return newGoal;
     }
 
 }
