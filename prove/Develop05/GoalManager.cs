@@ -60,7 +60,8 @@ class GoalManager
 				foreach(var goal in _goals)
 				{
 					// Serialize the goal details and write to the file
-					writer.WriteLine($"{count++}. {goal.GetType().Name},{goal.GetDescription()},{goal.GetValue()},{goal.IsComplete()}");
+					writer.WriteLine($"{count++},{goal.GetType().Name},{goal.GetDescription()},{goal.GetValue()},{goal.IsComplete()}");
+
 				}
 			}
 			Console.WriteLine($"Goals saved successfully to the file '{fileName}'.\n");
@@ -92,22 +93,57 @@ class GoalManager
 					{
 						// Deserialize the goal details from the file
 						string[] parts = line.Split(",");
-						string typeName = parts[0];
-						string description = parts[1];
-						int value = int.Parse(parts[2]);
-						bool isComplete = bool.Parse(parts[3]);
+						string index = parts[0];
+						string typeName = parts[1];
+						string description = parts[2];
+						int value = int.Parse(parts[3]);
+						// bool isComplete = bool.Parse(parts[4]);
 
-						// Create an instance of the goal type dynamically
-						Type goalType = Type.GetType(typeName);
-						Goal goal = (Goal)Activator.CreateInstance(goalType, description, value);
-
-						if (isComplete)
+						if (typeName == "ChecklistGoal")
 						{
-							goal.IsComplete();
-						}
+							int target = int.Parse(parts[4]);
+							bool isComplete = bool.Parse(parts[5]);
 
-						_goals.Add(goal);
+							Type goalType = Type.GetType(typeName);
+							if (goalType == null)
+							{
+								Console.WriteLine($"Error: Type '{typeName}' not found.");
+								// Handle the error, perhaps by skipping this line or logging the issue.
+								continue; // Skip to the next iteration of the loop
+							}
+
+							Goal goal = (Goal)Activator.CreateInstance(goalType, description, value, target);
+
+							if (isComplete)
+							{
+								goal.IsComplete();
+							}
+
+							_goals.Add(goal);
+						}
+						else
+						{
+							bool isComplete = bool.Parse(parts[4]);
+							
+							Type goalType = Type.GetType(typeName);
+							if (goalType == null)
+							{
+								Console.WriteLine($"Error: Type '{typeName}' not found.");
+								// Handle the error, perhaps by skipping this line or logging the issue.
+								continue; // Skip to the next iteration of the loop
+							}
+
+							Goal goal = (Goal)Activator.CreateInstance(goalType, description, value);
+
+							if (isComplete)
+							{
+								goal.IsComplete();
+							}
+
+							_goals.Add(goal);
+						}
 					}
+					Console.WriteLine("File Loaded Successfully!");
 				}
 			}
 		}
@@ -124,7 +160,7 @@ class GoalManager
 		{
 			Console.WriteLine($"{i + 1}. {_goals[i].DisplayStatus()}");
 		}
-		Console.WriteLine($"Total Score: {_score} points\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+		Console.WriteLine($"\nTotal Score: {_score} points\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 	}
 	
 }

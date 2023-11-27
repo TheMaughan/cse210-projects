@@ -21,7 +21,7 @@ class Menu
 			// Read a key directly without waiting for Enter
 			ConsoleKeyInfo key = Console.ReadKey(true);
 
-            string fileName = "goal";
+            //string fileName = "goal";
 
             switch (key.KeyChar)
             {
@@ -38,7 +38,7 @@ class Menu
                 case '3':
                     //Console.Write("What is the file name? ");
                      //Console.ReadLine();
-                    _goalManager.SaveToFile(fileName);
+                    _goalManager.SaveToFile("goal");
                     Thread.Sleep(2000);
                     
                     break;
@@ -46,7 +46,7 @@ class Menu
                 case '4':
                     //Console.Write("What is the file name? ");
                     //string _fileName = Console.ReadLine();
-                    _goalManager.LoadFromFile(fileName);
+                    _goalManager.LoadFromFile("goal.txt");
                     Thread.Sleep(2000);
                     break;
 

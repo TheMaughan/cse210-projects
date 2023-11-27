@@ -1,1 +1,3 @@
-0. SimpleGoal,asdf,12,True
+0,SimpleGoal,fix problem,100,True
+1,ChecklistGoal,Load File,50,3,False
+2,EternalGoal,Do Homework,50,True
