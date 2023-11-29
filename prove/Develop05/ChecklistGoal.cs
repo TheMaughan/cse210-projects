@@ -38,4 +38,13 @@ class ChecklistGoal : Goal
 	{
 		return $"\nGoals completed: {_currentCount} / {_targetCount}";
 	}
+
+	public int GetTarget()
+	{
+		return _targetCount;
+	}
+	public int GetCount()
+	{
+		return _currentCount;
+	}
 }

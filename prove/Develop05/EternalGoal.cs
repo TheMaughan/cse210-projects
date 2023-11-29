@@ -19,4 +19,9 @@ class EternalGoal : Goal
     {
         return $"[{_eternalProgress}] {_description}";
     }
+
+	public int GetProgress()
+	{
+		return _eternalProgress;
+	}
 }

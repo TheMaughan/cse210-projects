@@ -59,8 +59,22 @@ class GoalManager
 			{
 				foreach(var goal in _goals)
 				{
-					// Serialize the goal details and write to the file
-					writer.WriteLine($"{count++},{goal.GetType().Name},{goal.GetDescription()},{goal.GetValue()},{goal.IsComplete()}");
+
+					if (goal is ChecklistGoal checklistGoal)
+					{
+						// Serialize the goal details and write to the file
+						writer.WriteLine($"{count++},{checklistGoal.GetType().Name},{checklistGoal.GetDescription()},{checklistGoal.GetValue()},{checklistGoal.GetTarget()},{checklistGoal.GetCount()},{goal.IsComplete()}");
+					}
+					if (goal is EternalGoal eternalGoal)
+					{
+						writer.WriteLine($"{count++},{eternalGoal.GetType().Name},{eternalGoal.GetDescription()},{eternalGoal.GetValue()},{eternalGoal.GetProgress()},{eternalGoal.IsComplete()}");
+					}
+					else
+					{
+						// Serialize the goal details and write to the file
+						writer.WriteLine($"{count++},{goal.GetType().Name},{goal.GetDescription()},{goal.GetValue()},{goal.IsComplete()}");
+					}
+					
 
 				}
 			}
@@ -102,7 +116,8 @@ class GoalManager
 						if (typeName == "ChecklistGoal")
 						{
 							int target = int.Parse(parts[4]);
-							bool isComplete = bool.Parse(parts[5]);
+							int count = int.Parse(parts[5]);
+							bool isComplete = bool.Parse(parts[6]);
 
 							Type goalType = Type.GetType(typeName);
 							if (goalType == null)
@@ -117,6 +132,31 @@ class GoalManager
 							if (isComplete)
 							{
 								goal.IsComplete();
+								_score += value * count;
+							}
+
+							_goals.Add(goal);
+
+						}
+						else if (typeName == "EternalGoal")
+						{
+							int eternalProgress = int.Parse(parts[4]);
+							bool isComplete = bool.Parse(parts[5]);
+
+							Type goalType = Type.GetType(typeName);
+							if (goalType == null)
+							{
+								Console.WriteLine($"Error: Type '{typeName}' not found.");
+								// Handle the error, perhaps by skipping this line or logging the issue.
+								continue; // Skip to the next iteration of the loop
+							}
+
+							Goal goal = (Goal)Activator.CreateInstance(goalType, description, value);
+
+							if (isComplete)
+							{
+								goal.IsComplete();
+								_score += eternalProgress + value;
 							}
 
 							_goals.Add(goal);
@@ -138,6 +178,7 @@ class GoalManager
 							if (isComplete)
 							{
 								goal.IsComplete();
+								_score += value;
 							}
 
 							_goals.Add(goal);
