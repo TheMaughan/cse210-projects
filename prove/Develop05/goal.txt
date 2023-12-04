@@ -1,3 +1,6 @@
 0,SimpleGoal,fix problem,100,True
-1,ChecklistGoal,Load File,50,3,1,False
-2,EternalGoal,Do Homework,50,4,True
+1,ChecklistGoal,Load File,50,3,3,False
+2,EternalGoal,Do Homework,50,0,True
+3,SimpleGoal,New Goal,10,True
+4,ChecklistGoal,Checklist,10,10,5,False
+5,EternalGoal,Eternal,1,2,True

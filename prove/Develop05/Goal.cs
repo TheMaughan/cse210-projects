@@ -27,7 +27,7 @@ class Goal
 
 	public virtual string DisplayStatus()
 	{
-		return $"[{(IsComplete() ? 'X' : ' ')}] {_description}";
+		return $"[{(IsComplete() ? 'X' : ' ')}] {_description} - Value = {_value}";
 	}
 
 	public virtual bool IsComplete()

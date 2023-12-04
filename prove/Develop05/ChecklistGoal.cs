@@ -26,7 +26,16 @@ class ChecklistGoal : Goal
 
     public override string DisplayStatus()
     {
-        return $"Completed {_currentCount}/{_targetCount} times - {_description}";
+		// if completed show [X]
+		if (IsComplete())
+		{
+			return $"[X] {_description} is Completed {_currentCount}/{_targetCount} times - Value = {_value}";
+		}
+		// otherwise put a [ ]
+		else
+		{
+			return $"[ ] {_description} is Not Completed {_currentCount}/{_targetCount} times - Value = {_value}";
+		}
     }
 
     public override bool IsComplete()
@@ -46,5 +55,10 @@ class ChecklistGoal : Goal
 	public int GetCount()
 	{
 		return _currentCount;
+	}
+
+	public void SetCount(int count)
+	{
+		_currentCount = count;
 	}
 }

@@ -6,11 +6,13 @@ class GoalManager
 {
 	public List<Goal> _goals;
 	public int _score;
+	//public string _typeName;
 
 	public GoalManager()
 	{
 		_goals = new List<Goal>();
 		_score = 0;
+		//_typeName = "";
 	}
 
 	public void AddGoal()
@@ -65,7 +67,7 @@ class GoalManager
 						// Serialize the goal details and write to the file
 						writer.WriteLine($"{count++},{checklistGoal.GetType().Name},{checklistGoal.GetDescription()},{checklistGoal.GetValue()},{checklistGoal.GetTarget()},{checklistGoal.GetCount()},{goal.IsComplete()}");
 					}
-					if (goal is EternalGoal eternalGoal)
+					else if (goal is EternalGoal eternalGoal)
 					{
 						writer.WriteLine($"{count++},{eternalGoal.GetType().Name},{eternalGoal.GetDescription()},{eternalGoal.GetValue()},{eternalGoal.GetProgress()},{eternalGoal.IsComplete()}");
 					}
@@ -127,15 +129,19 @@ class GoalManager
 								continue; // Skip to the next iteration of the loop
 							}
 
-							Goal goal = (Goal)Activator.CreateInstance(goalType, description, value, target);
+							// Goal goal = (Goal)Activator.CreateInstance(goalType, description, value, target);
+							// goal.SetCount(count);
+
+							ChecklistGoal c = new(description, value, target);
+							c.SetCount(count);
 
 							if (isComplete)
 							{
-								goal.IsComplete();
+								c.IsComplete();
 								_score += value * count;
 							}
 
-							_goals.Add(goal);
+							_goals.Add(c);
 
 						}
 						else if (typeName == "EternalGoal")
@@ -151,15 +157,17 @@ class GoalManager
 								continue; // Skip to the next iteration of the loop
 							}
 
-							Goal goal = (Goal)Activator.CreateInstance(goalType, description, value);
+							//Goal goal = (Goal)Activator.CreateInstance(goalType, description, value);
+							EternalGoal e = new(description,value);
+							e.SetProgress(eternalProgress);
 
 							if (isComplete)
 							{
-								goal.IsComplete();
+								e.IsComplete();
 								_score += eternalProgress + value;
 							}
 
-							_goals.Add(goal);
+							_goals.Add(e);
 						}
 						else
 						{

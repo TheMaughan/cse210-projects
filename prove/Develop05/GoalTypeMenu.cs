@@ -1,7 +1,7 @@
 class GoalTypeMenu
 {
 	public List<Goal> _goals;
-    private int _score;
+    //private int _score;
 
     public string _goalDescription;
 
@@ -10,7 +10,7 @@ class GoalTypeMenu
     public GoalTypeMenu()
     {
         _goals = new List<Goal>();
-        _score = 0;
+        //_score = 0;
     }
 
     public Goal DisplayCreateGoalMenu()

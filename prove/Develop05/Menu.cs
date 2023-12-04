@@ -13,7 +13,7 @@ class Menu
             Console.WriteLine("3. Save Goals");
             Console.WriteLine("4. Load Goals");
             Console.WriteLine("5. Record Goals");
-            Console.WriteLine("6. ESC");
+            Console.WriteLine("6. Press '6' or 'ESC' key to quit");
 
             Console.Write("\nEnter your choice (1-6): ");
             //string choice = Console.ReadLine();

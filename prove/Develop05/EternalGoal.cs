@@ -17,11 +17,16 @@ class EternalGoal : Goal
 
     public override string DisplayStatus()
     {
-        return $"[{_eternalProgress}] {_description}";
+        return $"[{_eternalProgress}] {_description} - Goal Value = {_value}";
     }
 
 	public int GetProgress()
 	{
 		return _eternalProgress;
+	}
+
+	public void SetProgress(int progress)
+	{
+		_eternalProgress = progress;
 	}
 }
