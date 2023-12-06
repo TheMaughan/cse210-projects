@@ -1,0 +1,14 @@
+# customers.yaml
+- name: John Doe
+  address:
+    streetAddress: "123 Main St"
+    city: "City1"
+    state: "State1"
+    country: "USA"
+
+- name: Jane Doe
+  address:
+    streetAddress: "456 Oak St"
+    city: "City2"
+    state: "State2"
+    country: "Canada"

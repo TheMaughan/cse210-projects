@@ -1,0 +1,10 @@
+# products.yaml
+- name: Product1
+  productId: "P001"
+  price: 10.99
+  quantity: 2
+
+- name: Product2
+  productId: "P002"
+  price: 19.99
+  quantity: 1

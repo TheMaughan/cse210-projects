@@ -1,0 +1,32 @@
+# orders.yaml
+- orderNumber: 1
+  products:
+    - name: Product1
+      productId: "P001"
+      price: 10.99
+      quantity: 2
+    - name: Product2
+      productId: "P002"
+      price: 19.99
+      quantity: 1
+  customer:
+    name: John Doe
+    address:
+      streetAddress: "123 Main St"
+      city: "City1"
+      state: "State1"
+      country: "USA"
+
+- orderNumber: 2
+  products:
+    - name: Product2
+      productId: "P002"
+      price: 19.99
+      quantity: 1
+  customer:
+    name: Jane Doe
+    address:
+      streetAddress: "456 Oak St"
+      city: "City2"
+      state: "State2"
+      country: "Canada"
