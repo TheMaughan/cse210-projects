@@ -1,4 +1,3 @@
-# customers.yaml
 - _name: Joe Doenut
   address:
     _street: "123 Main St"

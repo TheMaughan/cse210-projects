@@ -5,18 +5,20 @@ public class Product
 	private float _Price { get; set; }
 	private int _Quantity { get; set; }
 
-	public Product()
-	{
-
-	}
-
 	public Product(string name, string id, float price, int quantity)
 	{
-		this._Name = name;
-		this._ProductID = id;
-		this._Price = price;
-		this._Quantity = quantity;
-
+		_Name = name;
+		_ProductID = id;
+		_Price = price;
+		_Quantity = quantity;
+	}
+	
+	public Product()
+	{
+		_Name = "";
+		_ProductID = "";
+		_Price = 0;
+		_Quantity = 0;
 	}
 
 	public string GetName() => _Name;

@@ -1,7 +1,7 @@
 public class Customer
 {
-	private string _name;
-	private Address _address;
+	private readonly string _name;
+	private readonly Address _address;
 
 	public Customer()
 	{
@@ -10,8 +10,8 @@ public class Customer
 
 	public Customer(string name, Address address)
 	{
-		this._name = name;
-		this._address = address;
+		_name = name;
+		_address = address;
 	}
 
 	public bool IsInUSA() => _address.IsInUSA();

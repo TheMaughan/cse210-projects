@@ -16,11 +16,11 @@ public class Address
 
 	public Address(string street, string city, string state, string zip, string country)
 	{
-		this._street = street;
-		this._state = state;
-		this._city = city;
-		this._zip = zip;
-		this._country = country;
+		_street = street;
+		_state = state;
+		_city = city;
+		_zip = zip;
+		_country = country;
 	}
 
 	public bool IsInUSA() => string.Equals(_country, "USA", StringComparison.OrdinalIgnoreCase);

@@ -13,9 +13,9 @@ public class Order
 
 	public Order(string orderNum, List<Product> products, Customer customer)
 	{
-		this._orderNum = orderNum;
-		this._products = products;
-		this._customer = customer;
+		_orderNum = orderNum;
+		_products = products;
+		_customer = customer;
 	}
 
 	public double GetPrice()
