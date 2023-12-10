@@ -1,0 +1,29 @@
+using System.Security.Cryptography.X509Certificates;
+
+public class Address
+{
+	private string _street;
+	private string _state;
+	private string _city;
+	private string _zip;
+	private string _country;
+
+	public Address()
+	{
+		
+	}
+
+
+	public Address(string street, string city, string state, string zip, string country)
+	{
+		this._street = street;
+		this._state = state;
+		this._city = city;
+		this._zip = zip;
+		this._country = country;
+	}
+
+	public bool IsInUSA() => string.Equals(_country, "USA", StringComparison.OrdinalIgnoreCase);
+
+	public string GetAllFieldsasString() => $"\n{_street}\n{_city}, {_state}  {_zip}\n{_country}\n";
+}

@@ -1,14 +1,24 @@
 # customers.yaml
-- name: John Doe
+- _name: Joe Doenut
   address:
-    streetAddress: "123 Main St"
-    city: "City1"
-    state: "State1"
-    country: "USA"
+    _street: "123 Main St"
+    _city: "Sacramento"
+    _state: "CA"
+    _zip: "94203"
+    _country: "USA"
 
-- name: Jane Doe
+- _name: Jane Murphy
   address:
-    streetAddress: "456 Oak St"
-    city: "City2"
-    state: "State2"
-    country: "Canada"
+    _street: "2-234 Pine St. N"
+    _city: "Toronto"
+    _state: "ON"
+    _zip: "M5V 1J2"
+    _country: "Canada"
+
+- _name: John Doe
+  address:
+    _street: "123 Main St"
+    _city: "City1"
+    _state: "State1"
+    _zip: "12345"
+    _country: "USA"

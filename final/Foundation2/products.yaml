@@ -1,10 +1,15 @@
 # products.yaml
-- name: Product1
-  productId: "P001"
-  price: 10.99
-  quantity: 2
+- _Name: Logitech Wireless Mouse
+  _ProductID: "E421"
+  _Price: 10.99
+  _Quantity: 53
 
-- name: Product2
-  productId: "P002"
-  price: 19.99
-  quantity: 1
+- _Name: Hanes XL - Navy Blue Pullover - 80% Cotton; 20% Polyester
+  _ProductID: "P452"
+  _Price: 19.99
+  _Quantity: 20
+
+- _Name: The One Ring
+  _ProductID: "T1R!"
+  _Price: 10.00
+  _Quantity: 1
