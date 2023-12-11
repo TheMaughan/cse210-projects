@@ -9,7 +9,7 @@ class Program
         // Display details for each order
         foreach (var order in orders)
         {
-            Console.WriteLine($"Order {order.GetOrderNum()} for Customer {order._Customer.GetName()}:");
+            Console.WriteLine($"\nOrder {order.GetOrderNum()} for Customer {order._Customer.GetName()}:");
 
             Console.WriteLine("Packing Label:");
             Console.WriteLine(order.PackingLabel());
