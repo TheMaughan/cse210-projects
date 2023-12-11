@@ -1,33 +1,29 @@
 public class Product
 {
-	private string _Name { get; set; }
-	private string _ProductID { get; set; }
-	private float _Price { get; set; }
-	private int _Quantity { get; set; }
+	private string _name;
+	private string _productID;
+	private double _price;
+	private int _quantity;
 
-	public Product(string name, string id, float price, int quantity)
+	public string _Name { get {return _name; } }
+	public string _ProductID { get {return _productID; } }
+	public double _Price { get {return _price * _quantity; } }
+
+	public Product(string name, string id, double price, int quantity)
 	{
-		_Name = name;
-		_ProductID = id;
-		_Price = price;
-		_Quantity = quantity;
-	}
-	
-	public Product()
-	{
-		_Name = "";
-		_ProductID = "";
-		_Price = 0;
-		_Quantity = 0;
+		this._name = name;
+		this._productID = id;
+		this._price = price;
+		this._quantity = quantity;
 	}
 
-	public string GetName() => _Name;
-	public string GetID() => _ProductID;
-	public float GetPrice() => _Price * _Quantity;
-	public int GetQuantity() => _Quantity;
+	// public string GetName() => _Name;
+	// public string GetID() => _ProductID;
+	// public double GetPrice() => _Price * _Quantity;
+	// public int GetQuantity() => _Quantity;
 	public int RemoveStock(int take)
 	{
-		_Quantity -= take;
-		return _Quantity;
+		_quantity -= take;
+		return _quantity;
 	}	
 }

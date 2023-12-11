@@ -8,12 +8,6 @@ public class Address
 	private string _zip;
 	private string _country;
 
-	public Address()
-	{
-		
-	}
-
-
 	public Address(string street, string city, string state, string zip, string country)
 	{
 		_street = street;
